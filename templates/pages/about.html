@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!--  ************************* Page Title Starts Here ************************** -->
+ <div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-start">About Our Company</h2>
+            <ul>
+                <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+                <li><i class="bi bi-chevron-double-right pe-2"></i> About Us</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- ******************** About US Starts Here ******************* -->
+<div class="about-us big-padding">
+    <div class="container-lg">
+
+        <div class="about-row row">
+            <div class="col-md-7">
+                <div class="abut-detail fs-6">
+
+                    <p class="mb-3">Integer vulputate vehicula dolor a eleifend. Duis aliquam condimentum sapien, eget tempor justo. Aenean porttitor nibh metus, Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida  sollicitudin egestas metus posuere et . Fusce egestas volutpat metus, in sodales sem bibendum porta. Nunc hendrerit nunc sit </p>
+                     <p class="mb-3"> Amet tellus posuere, at malesuada sem gravida. Integer maximus ultricies augue, at dapibus elit bibendum consequat.  Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida vestibulum, urna justo posuere ante, id pretium massa arcu sed mi. Nunc a sollicitudin sem. Duis tempus</p>
+                      <p class="mb-4">Integer vulputate vehicula dolor a eleifend. Duis aliquam condimentum sapien, eget tempor justo. Aenean porttitor nibh metus, sollicitudin egestas metus posuere et . Fusce egestas volutpat metus, in sodales sem bibendum porta. Nunc hendrerit nunc sit  Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida </p>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-5">
+                <img src="{% static 'images/h2.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+         <div id="testimonial" class="service bg-honey container-fluid px-4 py-5">
+            <div class="container">
+
+
+             <div class="section-title row mb-3">
+                <h2 class="fw-bolder">Testimonial</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum sit nibh amet egestas tellus.</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-4 col-md-6 mb-4">
+                   <div class="serv-cove shadow-md rounded bg-white p-3">
+                        <div class="prf row mb-3">
+                            <div class="col-3">
+                                <img class="rounded-pill" src="{% static 'images/testimonial/member-01.jpg' %}" alt="">
+                            </div>
+                            <div class="col-9 align-self-center">
+                                <h6 class="mb-0 fw-bolder">Vinoth Parkash</h6>
+                                <span>CEO Fabric Nation</span>
+                            </div>
+                        </div>
+                        <div class="det text-center">
+                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
+                        </div>
+                   </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                   <div class="serv-cove shadow-md rounded bg-white p-3">
+                        <div class="prf row mb-3">
+                            <div class="col-3">
+                                <img class="rounded-pill" src="{% static 'images/testimonial/member-03.jpg' %}" alt="">
+                            </div>
+                            <div class="col-9 align-self-center">
+                                <h6 class="mb-0 fw-bolder">Jackson Daniel</h6>
+                                <span>CEO Notitech</span>
+                            </div>
+                        </div>
+                        <div class="det text-center">
+                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
+                        </div>
+                   </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                   <div class="serv-cove shadow-md rounded bg-white p-3">
+                        <div class="prf row mb-3">
+                            <div class="col-3">
+                                <img class="rounded-pill" src="{% static 'images/testimonial/member-02.jpg' %}" alt="">
+                            </div>
+                            <div class="col-9 align-self-center">
+                                <h6 class="mb-0 fw-bolder">Praveen Thaney</h6>
+                                <span>Admin Vintech</span>
+                            </div>
+                        </div>
+                        <div class="det text-center">
+                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
+                        </div>
+                   </div>
+                </div>
+
+            </div>
+             </div>
+        </div>
+
+
+{% endblock %}
