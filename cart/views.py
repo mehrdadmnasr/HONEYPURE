@@ -9,33 +9,13 @@ from django.conf import settings
 import paypalrestsdk
 
 def get_cart(request):
-#    if request.user.is_authenticated:
-#        return Cart.objects.get_or_create(user=request.user)[0]
-#    else:
-        return request.session.get('cart', {})
+    return request.session.get('cart', {})
 
 def save_cart(request, cart):
-#    if request.user.is_authenticated:
-#        cart_instance, created = Cart.objects.get_or_create(user=request.user)
-#        for product_id, quantity in cart.items():
-#            product = get_object_or_404(Product, id=product_id)
-#            cart_item, created = CartItem.objects.get_or_create(cart=cart_instance, product=product)
-#            cart_item.quantity = quantity
-#            cart_item.save()
-#        request.session.pop('cart', None)
-#    else:
-        request.session['cart'] = cart
+    request.session['cart'] = cart
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-#    if request.user.is_authenticated:
-#        cart = Cart.objects.get_or_create(user=request.user)[0]
-#        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-#        if not created:
-#            cart_item.quantity += 1
-#        cart_item.save()
-#    else:
-
     cart = request.session.get('cart', {})
     quantity = int(request.POST.get('quantity', 1)) # دریافت تعداد از فرم
 
@@ -49,22 +29,11 @@ def add_to_cart(request, product_id):
     return redirect('cart_detail')
 
 def cart_detail(request):
-#    if request.user.is_authenticated:
-#        cart = Cart.objects.get(user=request.user)
-#        items = CartItem.objects.filter(cart=cart)
-#            # تمام آیتم‌های سبد خرید را دریافت کنید items = cart.items.all()
-#        data = {
-#            'cart': cart,
-#            'items': items,
-#            'total_price': cart.get_total_price(),
-#            'total_items': cart.get_total_items(),
-#        }
-#    else:
     cart = request.session.get('cart', {})
-
     items = [] # اگر کاربر وارد نشده باشد، آیتم‌ها باید خالی باشند
-
     total_price = 0
+    total_items = sum(cart.values())  # این خط اصلاح شد
+
     for product_id, quantity in cart.items():
         product = get_object_or_404(Product, id=int(product_id))
         item = {
@@ -75,19 +44,14 @@ def cart_detail(request):
         items.append(item)
         total_price += item['total_price']
 
-#    total_price = sum(Product.objects.get(id=int(prod_id)).price * qty for prod_id, qty in cart.items())
     data = {
         'items': items,
         'total_price': total_price,
-        'total_items': sum(cart.values()),
+        'total_items': total_items,  # اصلاح شمارش کل آیتم‌ها
     }
     return render(request, 'cart/cart_detail.html', data)
 
 def remove_from_cart(request, product_id):
-#    if request.user.is_authenticated:
-#        cart_item = get_object_or_404(CartItem, id=product_id)
-#        cart_item.delete()
-#    else:
     cart = request.session.get('cart', {})
     cart.pop(str(product_id), None)
     save_cart(request, cart)
@@ -95,16 +59,6 @@ def remove_from_cart(request, product_id):
     return redirect('cart_detail')
 
 def update_cart(request, product_id):
-#    if request.user.is_authenticated:
-#        cart_item = get_object_or_404(CartItem, id=product_id)
-#        if request.method == 'POST':
-#            quantity = int(request.POST.get('quantity', 1))
-#            if quantity > 0:
-#                cart_item.quantity = quantity
-#                cart_item.save()
-#            else:
-#                cart_item.delete()
-#    else:
     cart = request.session.get('cart', {})
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity', 1))
@@ -113,11 +67,6 @@ def update_cart(request, product_id):
         else:
             cart.pop(str(product_id), None)
         save_cart(request, cart)
-
-    # محاسبه مقدار کل سطر برای محصول به‌روزرسانی‌شده
-    product = get_object_or_404(Product, id=int(product_id))
-    total_price_for_item = product.price * cart[str(product_id)]
-    print(f"Updated Total Price for Product {product.product_title}: {total_price_for_item}")
 
     return redirect('cart_detail')
 

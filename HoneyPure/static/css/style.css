@@ -261,8 +261,9 @@ body {
   border-color: #f16f7e;
 }
 .btn-primary:hover {
-  background-color: #f16f7e !important;
-  border-color: #f16f7e !important;
+  background-color: #ffffff !important; /* تغییر رنگ به سفید هنگام hover */
+  border-color: #f16f7e !important; /* رنگ مرز به #f16f7e تغییر می‌کند */
+  color: #f16f7e;
 }
 .btn-primary:active {
   background-color: #f16f7e !important;

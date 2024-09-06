@@ -12,7 +12,7 @@
                 </div>
                 <div id="menu" class="col-lg-8 d-none d-lg-block">
                     <div class="row">
-                        <ul>
+                      <ul>
                           <!-- Add Login and Register buttons -->
                           {% if user.is_authenticated %}
                               <li class="float-end py-2 px-3">
@@ -44,7 +44,7 @@
                               </li>
                               <li class="float-end py-2 px-3">
                                   <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary py-1 px-2">
-                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart.get_total_items }})
+                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart_total_items }})
                                   </a>
                               </li>
                           {% endif %}

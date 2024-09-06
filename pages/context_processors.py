@@ -5,6 +5,7 @@ def cart_total_items(request):
     if not isinstance(cart, dict):
         cart = {}  # اگر cart دیکشنری نبود، آن را خالی تنظیم کن
 
-    # محاسبه تعداد کل آیتم‌ها
-    total_items = sum(item['quantity'] for item in cart.values())
+    # محاسبه تعداد کل آیتم‌ها با اطمینان از اینکه هر آیتم دیکشنری است
+    total_items = sum(cart.values())
+
     return {'cart_total_items': total_items}

@@ -104,3 +104,21 @@ document.addEventListener('DOMContentLoaded', function () {
     updateProductDisplay();
     updateButtons();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // انتخاب تمام alert‌ها با کلاس alert-dismissible
+  const alertElements = document.querySelectorAll('.alert-dismissible');
+
+  alertElements.forEach((alertElement) => {
+    // تنظیم زمانبندی برای شروع افکت محو شدن بعد از ۴ ثانیه
+    setTimeout(() => {
+      alertElement.classList.remove('show');
+      alertElement.classList.add('hide');
+
+      // حذف کامل عنصر از DOM بعد از پایان افکت محو شدن
+      setTimeout(() => {
+        alertElement.remove();
+      }, 1000); // مدت زمان افکت محو شدن باید با زمان انتقال CSS مطابقت داشته باشد
+    }, 4000);
+  });
+});
