@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} | Checkout {% endblock %}
+{% block content %}
+
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <h1 class="mb-4">Checkout</h1>
+
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            <fieldset class="mb-4">
+                <legend>Select Address</legend>
+                {% for address in addresses %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="address_{{ address.id }}" name="address_id" value="{{ address.id }}">
+                        <label class="form-check-label" for="address_{{ address.id }}">
+                            {{ address.address }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+
+        <h2 class="mt-5">Add New Address</h2>
+        <form action="{% url 'manage_addresses' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add">
+            <div class="mb-3">
+                <label for="new_address" class="form-label">New Address:</label>
+                <textarea id="new_address" name="address" class="form-control" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Address</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

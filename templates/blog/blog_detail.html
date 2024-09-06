@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{single_blog.title}} {% endblock %}
+{% block content %}
+
+{% load static %}
+{% load custom_filters %}
+
+
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-start">{{single_blog.title}}</h2>
+            <ul>
+              {% if request.GET.source == 'home' %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+              {% elif request.GET.source == 'blog' %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+                  <li> <a href="{% url 'blog' %}"><i class="bi bi-chevron-double-right pe-2"></i><i class="fa fa-comment"></i> Blog</a></li>
+              {% else %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+              {% endif %}
+                <li><i class="bi bi-chevron-double-right pe-2"></i> >{{single_blog.title}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--####################### Product Detail Starts Here ###################-->
+<div class="container-fluid big-padding bg-white about-cover">
+    <div class="container">
+        <div class="row about-row">
+            <div class="col-md-5 p-5 text-center">
+                <img src="{{single_blog.image.url}}" alt="{{single_blog.title}}">
+            </div>
+            <div class="col-md-7">
+                <h2>{{single_blog.title}}</h2>
+                <div id="text_completed" style="text-align: justify;">{{single_blog.summary | truncate_lines:100 | safe}} </div>
+                <br/>
+                <div class="d-flex justify-content-between">
+                    <b>{{single_blog.author}}</b>
+                    <b>{{single_blog.publish_date}}</b>
+                </div>
+                <br/>
+
+
+                <ul class="facilities-list">
+                  {% for tag in tags %}
+                    <li>{{ tag }}</li>
+                  {% endfor %}
+
+                  {% for _ in empty_tags %}
+                    <li class="empty-tag"></li>
+                  {% endfor %}
+                </ul>
+
+                <br/>
+
+            </div>
+        </div>
+        <div id="text_completed" style="text-align: justify;">
+            {{ single_blog.content|truncate_lines:100|safe }}
+        </div>
+
+
+      </div>
+  </div>
+
+{% endblock %}

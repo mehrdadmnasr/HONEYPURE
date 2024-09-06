@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!-- Main header start -->
 <header>
@@ -10,13 +11,60 @@
                      <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
                 </div>
                 <div id="menu" class="col-lg-8 d-none d-lg-block">
-                    <ul class="fw-bold float-end nacul fs-7">
-                        <li class="float-start p-3 px-4"><a href="{% url 'home' %}">Home</a></li>
-                        <li class="float-start p-3 px-4"><a href="{% url 'about' %}">About Us</a></li>
-                        <li class="float-start p-3 px-4"><a href="">Products</a></li>
-                        <li class="float-start p-3 px-4"><a href="">Blog</a></li>
-                        <li class="float-start p-3 px-4"><a href="{% url 'contact' %}">Contact Us</a></li>
-                    </ul>
+                    <div class="row">
+                        <ul>
+                          <!-- Add Login and Register buttons -->
+                          {% if user.is_authenticated %}
+                              <li class="float-end py-2 px-3">
+                                  <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                      {% csrf_token %}
+                                      <button type="submit" class="btn btn-primary py-1 px-2">
+                                          <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                      </button>
+                                  </form>
+                              </li>
+                              <li class="float-end py-2 px-3">
+                                  <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary py-1 px-2">
+                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart_total_items }})
+                                  </a>
+                              </li>
+                              <li class="float-end py-2 px-3">
+                                  <span class="btn btn-outline-secondary py-1 px-2">Hello, {{ user.username }}</span>
+                              </li>
+                          {% else %}
+                              <li class="float-end py-2 px-3">
+                                  <a href="{% url 'register' %}" class="btn btn-primary py-1 px-2">
+                                      <i class="bi bi-person-plus-fill me-2"></i>Register
+                                  </a>
+                              </li>
+                              <li class="float-end py-2 px-3">
+                                  <a href="{% url 'login' %}" class="btn btn-outline-primary py-1 px-2">
+                                      <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                                  </a>
+                              </li>
+                              <li class="float-end py-2 px-3">
+                                  <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary py-1 px-2">
+                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart.get_total_items }})
+                                  </a>
+                              </li>
+                          {% endif %}
+                        </ul>
+                    </div>
+                    <div class="row float-end">
+                        <ul class="fw-bold float-start nacul fs-7">
+                            <li class="float-start py-2 px-3"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="float-start py-2 px-3"><a href="{% url 'about' %}">About Us</a></li>
+                            <li class="float-start py-2 px-3"><a href="{% url 'products' %}">Products</a></li>
+                            <li class="float-start py-2 px-3"><a href="{% url 'blog' %}">Blog</a></li>
+                            <li class="float-start py-2 px-3"><a href="{% url 'contact' %}">Contact Us</a></li>
+                            <!-- دکمه جستجو -->
+                            <li class="float-start py-2 px-2">
+                                <button class="btn btn-outline-secondary d-flex align-items-center" style="border: none;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,27 +1,33 @@
 {% load static %}
 
-<!doctype html>
-  <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
+        <title>Cool Honey {% block title %}    {% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Cool Honey Website Template | Smarteyeapps.com</title>
-        <link rel="shortcut icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
+        <meta charset="utf-8">
+
+        <!-- External CSS libraries -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" type="text/css" href="{% static 'css/mine.css' %}" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'images/fav.png' %}" type="image/x-icon">
         <link rel="shortcut icon" href="{% static 'images/fav.jpg' %}">
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="{% static 'plugins/testimonial/css/owl.carousel.min.css' %}">
         <link rel="stylesheet" href="{% static 'plugins/testimonial/css/owl.theme.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+
     </head>
     <body class="bg-white">
 
       {% include 'includes/navbar.html' %}
 
-
       {% block content %}
-
       {% endblock %}
 
       {% include 'includes/footer.html' %}
@@ -34,4 +40,4 @@
       <script src="{% static 'js/script.js' %}"></script>
 
     </body>
-  </html>
+</html>

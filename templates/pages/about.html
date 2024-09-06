@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %} | About US {% endblock %}
 {% block content %}
 
 {% load static %}
+{% load custom_filters %}
+
 
 <!--  ************************* Page Title Starts Here ************************** -->
  <div class="page-nav no-margin row">
@@ -26,9 +29,9 @@
             <div class="col-md-7">
                 <div class="abut-detail fs-6">
 
-                    <p class="mb-3">Integer vulputate vehicula dolor a eleifend. Duis aliquam condimentum sapien, eget tempor justo. Aenean porttitor nibh metus, Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida  sollicitudin egestas metus posuere et . Fusce egestas volutpat metus, in sodales sem bibendum porta. Nunc hendrerit nunc sit </p>
-                     <p class="mb-3"> Amet tellus posuere, at malesuada sem gravida. Integer maximus ultricies augue, at dapibus elit bibendum consequat.  Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida vestibulum, urna justo posuere ante, id pretium massa arcu sed mi. Nunc a sollicitudin sem. Duis tempus</p>
-                      <p class="mb-4">Integer vulputate vehicula dolor a eleifend. Duis aliquam condimentum sapien, eget tempor justo. Aenean porttitor nibh metus, sollicitudin egestas metus posuere et . Fusce egestas volutpat metus, in sodales sem bibendum porta. Nunc hendrerit nunc sit  Cras faucibus tellus eleifend, fermentum purus in, dapibus sapien. Praesent nec ornare risus. Etiam iaculis, ligula vel gravida </p>
+                  <p class="mb-3" style="text-align: justify;"> <b>Our company</b> is dedicated to the art of honey production, bringing you the finest honey from the most pristine environments. We source our honey from beekeepers who practice sustainable beekeeping methods, ensuring that every jar we deliver is of the highest quality. Our mission is to provide pure, unadulterated honey that retains all the natural goodness and health benefits that nature intended. </p>
+                   <p class="mb-3" style="text-align: justify;"> We believe in the power of nature and strive to preserve it in every step of our production process. From the moment our bees begin gathering nectar to the time the honey is bottled, we maintain rigorous quality control to ensure purity and authenticity. Our commitment to sustainability goes beyond just honey production; it extends to our packaging, distribution, and every aspect of our business operations. </p>
+                    <p class="mb-4" style="text-align: justify;"> As a customer-focused company, we are dedicated to exceeding your expectations. We continually innovate to bring you new and exciting honey products, while staying true to our core values of quality, sustainability, and transparency. Whether you are a long-time honey lover or new to its wonders, we are here to provide you with an exceptional honey experience that you can trust. </p>
                 </div>
 
 
@@ -48,59 +51,36 @@
 
              <div class="section-title row mb-3">
                 <h2 class="fw-bolder">Testimonial</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ipsum sit nibh amet egestas tellus.</p>
+                <p>Hear from those who know us best—our dedicated team members. Their passion and expertise drive our commitment to quality. </p>
             </div>
             <div class="row mt-5">
-                <div class="col-lg-4 col-md-6 mb-4">
-                   <div class="serv-cove shadow-md rounded bg-white p-3">
-                        <div class="prf row mb-3">
-                            <div class="col-3">
-                                <img class="rounded-pill" src="{% static 'images/testimonial/member-01.jpg' %}" alt="">
-                            </div>
-                            <div class="col-9 align-self-center">
-                                <h6 class="mb-0 fw-bolder">Vinoth Parkash</h6>
-                                <span>CEO Fabric Nation</span>
-                            </div>
-                        </div>
-                        <div class="det text-center">
-                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
-                        </div>
-                   </div>
-                </div>
 
+              {% for team in teams %}
                 <div class="col-lg-4 col-md-6 mb-4">
                    <div class="serv-cove shadow-md rounded bg-white p-3">
                         <div class="prf row mb-3">
                             <div class="col-3">
-                                <img class="rounded-pill" src="{% static 'images/testimonial/member-03.jpg' %}" alt="">
+                                <img class="rounded-pill" src="{{team.photo.url}}" alt="">
                             </div>
                             <div class="col-9 align-self-center">
-                                <h6 class="mb-0 fw-bolder">Jackson Daniel</h6>
-                                <span>CEO Notitech</span>
+                                <h6 class="mb-0 fw-bolder">{{team.first_name}} {{team.last_name}}</h6>
+                                <span>{{team.designation}}</span>
+                                <div class="col-4 align-self-center clearfix">
+                                    <a href="{{team.facebook_link}}" target="_blank" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{team.twitter_link}}" target="_blank" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                    <a href="{{team.google_plus_link}}" target="_blank" class="google-bg"><i class="fa fa-google"></i></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="det text-center">
-                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
-                        </div>
-                   </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6 mb-4">
-                   <div class="serv-cove shadow-md rounded bg-white p-3">
-                        <div class="prf row mb-3">
-                            <div class="col-3">
-                                <img class="rounded-pill" src="{% static 'images/testimonial/member-02.jpg' %}" alt="">
-                            </div>
-                            <div class="col-9 align-self-center">
-                                <h6 class="mb-0 fw-bolder">Praveen Thaney</h6>
-                                <span>Admin Vintech</span>
-                            </div>
                         </div>
                         <div class="det text-center">
-                            <p class="fs-7 fst-italic">Sed lectus ante, pharetra in lacus sed, efficitur luctus elit. Suspendisse commodo felis dictum, tempor tortor a, dapibus tellus. Nam ornare felis ut arcu tristique luctus. Curabitur </p>
+                            <a href="{% url 'team_detail' team.id %}?source=about" class="fs-7 fst-italic" id="text_continue">{{ team.description|safe }}</a>
+                            <a href="{% url 'team_detail' team.id %}?source=about" class="read-more">Show more ...</a>
                         </div>
+
                    </div>
                 </div>
+              {% endfor %}
 
             </div>
              </div>

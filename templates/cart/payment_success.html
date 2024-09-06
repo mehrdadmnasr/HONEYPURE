@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} | Payment Success {% endblock %}
+{% block content %}
+
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <h1 class="mb-4">Payment Successful</h1>
+        <p>Thank you for your purchase! Your payment has been successfully processed.</p>
+        <a href="{% url 'order_confirmation' %}" class="btn btn-primary">View Order Confirmation</a>
+    </div>
+</div>
+
+{% endblock %}

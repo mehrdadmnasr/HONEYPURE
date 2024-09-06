@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %} | {{single_product.product_title}} {% endblock %}
+{% block content %}
+
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-start">{{single_product.product_title}}</h2>
+            <ul>
+              {% if request.GET.source == 'home' %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+              {% elif request.GET.source == 'products' %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+                  <li> <a href="{% url 'products' %}"><i class="bi bi-chevron-double-right pe-2"></i><i class="fa fa-gg"></i> Products</a></li>
+              {% else %}
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+              {% endif %}
+                <li><i class="bi bi-chevron-double-right pe-2"></i> >{{single_product.product_title}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--####################### Product Detail Starts Here ###################-->
+<div class="container-fluid big-padding bg-white about-cover">
+    <div class="container">
+        <div class="row about-row">
+            <div class="col-md-5 p-5 text-center">
+                <img src="{{single_product.product_photo.url}}" alt="{{single_product.product_title}}">
+            </div>
+            <div class="col-md-7">
+                <h2>{{single_product.product_title}} pure Organic</h2>
+                <div id="text_completed" style="text-align: justify;">{{single_product.description | truncate_lines:100 | safe}} </div>
+                <b class="fs-3 py-4">$ {{single_product.price | intcomma}}</b>
+                <span class="fs-5 ps-3 text-danger text-decoration-line-through">$ {{single_product.old_price | intcomma}}</span>
+
+
+                {% with average_rating as rating %}
+                <ul class="mt-0 mt-2 mb-3 vgth">
+                    <!-- ایجاد ستاره‌ها به‌صورت داینامیک -->
+                    <li class="fs-8">
+                    {% for i in "01234" %}
+                        {% if i < rating|floatformat:0 %}
+                                <i class="bi text-warning bi-star-fill"></i>
+                        {% else %}
+                                <i class="bi bi-star-fill"></i>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- نمایش میانگین نمرات -->
+                    <span>{{ rating|floatformat:1 }}</span>
+                    </li>
+                    <!-- علامت قلب برای علاقمندی -->
+                    <li class="float-end gvi">
+                        <i class="bi text-danger bi-heart-fill"></i>
+                    </li>
+                </ul>
+                {% endwith %}
+                <ul class="key-features mt-2">
+                  {% for feature in single_product.features %}
+                    <li><i class="bi bi-caret-right"></i> {{feature}}</li>
+                  {% endfor %}
+                </ul>
+
+                <!-- Add to Cart Form -->
+                <form action="{% url 'add_to_cart' single_product.id %}" method="post" class="mt-4">
+                   {% csrf_token %}
+                   <div class="row">
+                       <div class="col-md-3">
+                           <label for="quantity" class="form-label">Quantity:</label>
+                           <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
+                       </div>
+                       <div class="col-md-3">
+                           <button type="submit" class="btn btn-primary mt-4">Add to Cart</button>
+                       </div>
+                   </div>
+                </form>
+                
+            </div>
+        </div>
+        <div class="row product-detail">
+           <h4>Product Detail</h4>
+            <div class="mb-3" id="text_completed" style="text-align: justify;">{{single_product.detail | truncate_lines:100 | safe}}</div>
+          </div>
+      </div>
+  </div>
+
+ <!--####################### Reviews Section Starts Here ###################-->
+ <div class="container-fluid bg-honey px-4 py-5">
+     <div class="container">
+         <div class="row reviews-section">
+             <h4>Reviews</h4>
+             <div id="reviews-container">
+                 {% for review in reviews %}
+
+                 <div class="row m-0 reviewrow p-3 px-0 border-bottom">
+                    <div class="col-md-12 align-items-center col-9 rcolm">
+                        <div class="review">
+                          <ul class="mt-0 mt-2 mb-3 vgth">
+                              <!-- ایجاد ستاره‌ها به‌صورت داینامیک -->
+                              <li class="fs-8">
+                              {% for i in "01234" %}
+                                  {% if i < review.rating|floatformat:0 %}
+                                          <i class="bi text-warning bi-star-fill"></i>
+                                  {% else %}
+                                          <i class="bi bi-star-fill"></i>
+                                  {% endif %}
+                              {% endfor %}
+                             </li>
+                          </ul>
+                        </div>
+                        <h3 class="fs-5 fw-semi mt-2">{{review.reviewer_name}}
+
+
+                        <small class="float-end fw-normal">{{review.review_date}} </small>
+                        </h3>
+
+                        <div class="review-text">
+                              {{review.review_text}}
+                        </div>
+
+                        <div class="review-text">
+                             {% if review.verified_purchase %}
+                                  Verified Purchase
+                             {% else %}
+                                  Unverified Purchase
+                             {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+                 {% endfor %}
+             </div>
+         </div>
+         <div>
+              <br/>
+         </div>
+         <!-- Review Form -->
+         <div class="row review-form-section">
+             <h4>Write a Review</h4>
+             <form id="review-form" method="post" action="">
+                 {% csrf_token %}
+                 <div class="mb-3">
+                     <label for="reviewer_name" class="form-label">Name:</label>
+                     <input type="text" id="reviewer_name" name="reviewer_name" class="form-control" required>
+                 </div>
+                 <div class="mb-3">
+                     <label for="review_text" class="form-label">Review Text:</label>
+                     <textarea id="review_text" name="review_text" class="form-control" required></textarea>
+                 </div>
+                 <div class="mb-3">
+                     <label for="rating" class="form-label">Rating:</label>
+                     <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
+                 </div>
+                 <div class="mb-3 form-check">
+                     <input type="checkbox" id="verified_purchase" name="verified_purchase" class="form-check-input" disabled>
+                     <label for="verified_purchase" class="form-check-label">Verified Purchase</label>
+                 </div>
+                 <button type="submit" class="btn btn-primary">Submit Review</button>
+             </form>
+         </div>
+     </div>
+ </div>
+
+{% endblock %}
+
+<script>
+document.getElementById('review-form').addEventListener('submit', function(event) {
+   event.preventDefault();
+   var formData = new FormData(this);
+   fetch("{% url 'product_detail' single_product.id %}", {
+       method: 'POST',
+       body: formData,
+   })
+   .then(response => response.json())
+   .then(data => {
+       if (data.success) {
+           loadReviews();
+       }
+   });
+});
+
+function loadReviews() {
+   fetch("{% url 'get_product_reviews' single_product.id %}")
+   .then(response => response.json())
+   .then(data => {
+       var reviewsContainer = document.getElementById('reviews-container');
+       reviewsContainer.innerHTML = '';
+       data.reviews.forEach(review => {
+           var reviewElement = document.createElement('div');
+           reviewElement.classList.add('review');
+           reviewElement.innerHTML = `
+               <h5>${review.reviewer_name}</h5>
+               <p>${review.review_text}</p>
+               <p>Rating: ${review.rating}</p>
+               <p>Date: ${review.review_date}</p>
+               <p>Verified Purchase: ${review.verified_purchase}</p>
+           `;
+           reviewsContainer.appendChild(reviewElement);
+       });
+   });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+   loadReviews();
+});
+</script>
