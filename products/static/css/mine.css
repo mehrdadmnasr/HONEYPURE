@@ -504,19 +504,6 @@ button:focus {
     margin-bottom: 5px;
 }
 
-input[type=checkbox]:checked + label:before {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    content: "\f00c";
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    text-align: center;
-    line-height: 16px;
-    font-weight: 300;
-}
 
 .advanced-search ul {
     padding: 0;
@@ -5485,63 +5472,6 @@ input[type=checkbox]:checked + label:before {
     margin-left: 3px;
 }
 
-.contact-section .form-section .checkbox {
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.contact-section .form-section .form-check{
-    float: left;
-    margin-bottom: 0;
-}
-
-.contact-section .form-section .form-check a {
-    color: #616161;
-    float: right;
-}
-
-.contact-section .form-section .form-check-input {
-    position: absolute;
-    margin-left: 0;
-}
-
-.contact-section .form-section .form-check label::before {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 2px;
-    margin-left: -25px;
-    border: 1px solid #c5c3c3;
-    border-radius: 3px;
-    background-color: #fff;
-}
-
-.contact-section .form-section .form-check-label {
-    padding-left: 25px;
-    margin-bottom: 0;
-    font-size: 14px;
-    color: #616161;
-}
-
-.contact-section .form-section .checkbox-theme input[type="checkbox"]:checked + label::before {
-    background-color: #00a875;
-    border-color: #00a875;
-}
-
-.contact-section .form-section input[type=checkbox]:checked + label:before {
-    font-weight: 300;
-    color: #f3f3f3;
-    line-height: 15px;
-    font-size: 14px;
-    content: "\2713";
-}
-
-.contact-section .form-section input[type=checkbox], input[type=radio] {
-    margin-top: 4px;
-}
-
 .contact-section .form-section a.forgot-password {
     font-size: 15px;
     float: right;
@@ -9500,4 +9430,28 @@ a.nav-link.active{
 
 .alert .fade .hide {
   opacity: 0;
+}
+
+
+
+
+
+.aclass {
+    font-size: 1rem !important; /* کاهش سایز فونت */
+}
+
+
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    margin-right: 0.5rem; /* فاصله بین چک باکس و برچسب */
+}
+
+/* برای اطمینان از عدم اضافه شدن تیک به متن */
+.form-check-label::before {
+    content: none; /* حذف هرگونه محتوای اضافی پیش‌فرض */
 }

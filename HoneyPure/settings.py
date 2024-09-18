@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'django.contrib.humanize',
     'django.contrib.sites',
-
+    
     # برنامه‌های django-allauth
     'allauth',
     'allauth.account',

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h2>Add New Address</h2>
+
+    <!-- فرم برای دریافت آدرس -->
+    <form method="POST" id="address-form" novalidate>
+        {% csrf_token %}
+
+        <!-- نمایش خطاهای کلی فرم -->
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="address-input">Enter your address:</label>
+            <input type="text" id="address-input" class="form-control" placeholder="Enter your address">
+        </div>
+
+        <!-- نقشه گوگل -->
+        <div id="map" style="width: 100%; height: 400px;"></div>
+
+        <!-- فیلدهای فرم آدرس -->
+        {% include 'cart/address_form.html' %}
+
+        <button type="submit" class="btn btn-primary mt-3 mb-3">Save Address</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([43.8417, -79.4283], 12); // موقعیت اولیه روی نقشه
+
+        // لایه نقشه OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var marker = L.marker([43.8417, -79.4283], {draggable: true}).addTo(map);
+
+        // جابجایی مارکر
+        marker.on('dragend', function(e) {
+            var latLng = marker.getLatLng();
+            document.getElementById('location_lat').value = latLng.lat;
+            document.getElementById('location_long').value = latLng.lng;
+            reverseGeocode(latLng);
+        });
+
+        // جستجوی آدرس بعد از blur (ترک کردن فیلد آدرس)
+        document.getElementById('address-input').addEventListener('blur', function() {
+            var address = document.getElementById('address-input').value;
+            searchAddress(address);
+        });
+
+        // جستجوی آدرس با فشردن کلید Enter
+        document.getElementById("address-input").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                var address = document.getElementById('address-input').value;
+                searchAddress(address);
+            }
+        });
+
+        // تابع جستجوی آدرس
+        function searchAddress(address) {
+            if (!address) {
+                alert("Please enter an address!");
+                return;
+            }
+
+            var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    var lat = data[0].lat;
+                    var lon = data[0].lon;
+
+                    // تنظیم مکان جدید روی نقشه و جابجایی مارکر
+                    var latLng = new L.LatLng(lat, lon);
+                    map.setView(latLng, 12);
+                    marker.setLatLng(latLng);
+
+                    // پر کردن فیلدهای latitude و longitude
+                    document.getElementById('location_lat').value = lat;
+                    document.getElementById('location_long').value = lon;
+
+                    // فراخوانی تابع reverse geocode برای دریافت جزئیات آدرس
+                    reverseGeocode(latLng);
+                } else {
+                    alert('No results found for this address.');
+                }
+            })
+            .catch(error => alert('Error: ' + error));
+        }
+
+        // تابع آدرس‌یابی معکوس
+        function reverseGeocode(latLng) {
+            var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latLng.lat}&lon=${latLng.lng}`;
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.address) {
+                    document.getElementById('address-details').value = data.display_name;
+                    document.getElementById('address_line1').value = data.address.road || '';
+                    document.getElementById('address_line2').value = data.address.suburb || data.address.neighborhood || '';
+                    document.getElementById('city').value = data.address.city || '';
+                    document.getElementById('postal_code').value = data.address.postcode || '';
+                    document.getElementById('country').value = data.address.country || '';
+                    document.getElementById('state').value = data.address.state || '';
+                } else {
+                    alert('No results found');
+                }
+            })
+            .catch(error => alert('Error: ' + error));
+        }
+    });
+</script>
+
+{% endblock %}

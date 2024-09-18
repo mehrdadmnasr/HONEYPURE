@@ -8,55 +8,71 @@
 
 <div class="container-fluid bg-light py-5">
     <div class="container">
+      {% include 'includes/messages.html' %}
         <h1 class="mb-4">Cart</h1>
 
         {% if items %}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in items %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>{{ item.product.product_title }}</td>
-                            <td>
-                                <form action="{% url 'update_cart' item.product.id %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control">
-                                    <button type="submit" class="btn btn-primary mt-2">Update</button>
-                                </form>
-                            </td>
-                            <td>$ {{ item.product.price | intcomma }}</td>
-                            <td>$ {{ item.total_price | intcomma }}</td>
-                            <td>
-                                <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Remove</button>
-                                </form>
-                            </td>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit Price ($)</th>
+                            <th>Item Price ($)</th>
+                            <th>Tax ($)</th>
+                            <th>Toll ($)</th>
+                            <th>Total Price ($)</th>
+                            <th>Actions</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            {% if cart.items.all %}
-            <form action="{% url 'apply_coupon' %}" method="post" class="mt-4">
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                            <!-- محاسبه مالیات و عوارض به ازای هر محصول -->
+                            <tr>
+                                <td>{{ item.product.product_title }}</td>
+                                <td>
+                                    <form action="{% url 'update_cart' item.product.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                </td>
+                                <td>{{ item.unit_price | floatformat:2 }}</td>
+                                <td>{{ item.item_price | floatformat:2 }}</td>
+                                <td>{{ item.tax | floatformat:2 }}</td> <!-- نمایش مالیات -->
+                                <td>{{ item.toll | floatformat:2 }}</td> <!-- نمایش عوارض -->
+                                <td>{{ item.total_price | floatformat:2 }}</td> <!-- جمع کل -->
+                                <td>
+                                    <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if total_items %}
+            <form action="{% url 'apply_coupon' %}" method="POST" class="mt-2">
                 {% csrf_token %}
                 <div class="input-group">
                     <input type="text" class="form-control" name="coupon_code" placeholder="Coupon Code">
-                    <button type="submit" class="btn btn-success">Apply</button>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-success">Apply</button>
+                    </div>
                 </div>
             </form>
             {% endif %}
 
-            <h3 class="mt-4">Total Price: ${{ total_price | intcomma }}</h3>
+            <!-- نمایش تخفیف -->
+            <h5 class="mt-2">Total Price: ${{ total_price|floatformat:2 }}</h5>
+            <h5 class="text-success mt-3">Discount Applied: -${{ discount_amount|floatformat:2 }}</h5>
+            <!-- قیمت نهایی پس از تخفیف -->
+            <h5 class="mt-3">Final Price: ${{ final_price|floatformat:2 }}</h5>
             <a href="{% url 'checkout' %}" class="btn btn-primary mt-4">Proceed to Checkout</a>
+
         {% else %}
             <p>Your cart is empty.</p>
         {% endif %}

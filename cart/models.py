@@ -1,8 +1,17 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from products.models import Product  # اطمینان از مسیر صحیح
+from django.utils import timezone
 
 User = get_user_model()
+
+class Tax(models.Model):
+    year = models.PositiveIntegerField(default=timezone.now().year)  # ذخیره سال
+    tax_percentage = models.DecimalField(max_digits=5, decimal_places=2)
+    toll_percentage = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f"Year: {self.year}, Tax: {self.tax_percentage}%, Toll: {self.toll_percentage}%"
 
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,9 +25,11 @@ class Cart(models.Model):
         return f"Cart of {self.user.username}"
 
     def get_total_price(self):
-        total = sum(item.get_total_price() for item in self.items.all())
+        total = sum(item.get_total_price_with_tax() for item in self.items.all())
         if self.coupon:
-            total -= (total * (self.coupon.discount / 100))
+            max_discount = total / 2  # تخفیف حداکثر نصف جمع کل
+            discount = min(self.coupon.discount_amount, max_discount)
+            total -= discount
         return total
 
     def get_total_items(self):
@@ -31,13 +42,20 @@ class CartItem(models.Model):
     # The product that is being added to the cart
     quantity = models.PositiveIntegerField(default=1)
     # The quantity of the product in the cart
+    tax_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # درصد مالیات
+    toll_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # درصد عوارض
 
     def __str__(self):
         return f"{self.quantity} x {self.product.product_title}"
 
     def get_total_price(self):
-        # Calculate the total price for this item (quantity * price per product)
         return self.product.price * self.quantity
+
+    def get_total_price_with_tax(self):
+        total_price = self.get_total_price()
+        tax_amount = total_price * (self.tax_percent / 100)
+        toll_amount = total_price * (self.toll_percent / 100)
+        return total_price + tax_amount + toll_amount
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -73,15 +91,13 @@ class Order(models.Model):
 
     def get_total_price(self):
         total = sum(item.get_total_price() for item in self.items.all())
-        if self.coupon:
-            total -= (total * (self.coupon.discount / 100))
-        return total
+        return total - self.get_discount()
 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     # The order that this item belongs to
-    product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     # The product that is included in the order
     price = models.DecimalField(max_digits=10, decimal_places=2)
     # The price of the product at the time of the order
@@ -98,21 +114,31 @@ class OrderItem(models.Model):
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # The user who owns this address
-    address_line1 = models.CharField(max_length=255)
+    address_name = models.CharField(max_length=100, blank=False, null=False, default='')  # فیلد اجباری  # نام آدرس
+    # The name of the address
+    address_details = models.TextField(blank=False, null=False, default='')
+    # Detailed address information (e.g., specific instructions or landmarks)
+    address_line1 = models.CharField(max_length=255, blank=False, null=False, default='')  # فیلد اجباری
     # The first line of the address (e.g., street name)
-    address_line2 = models.CharField(max_length=255, blank=True, null=True)
+    address_line2 = models.CharField(max_length=255, blank=True, null=True, default='')
     # The second line of the address (e.g., apartment, suite) (optional)
-    city = models.CharField(max_length=100)
+    city = models.CharField(max_length=100, blank=False, null=False, default='')
     # The city of the address
-    postal_code = models.CharField(max_length=20)
+    state = models.CharField(max_length=100, blank=True, null=True, default='')
+    # The state or province of the address (optional)
+    postal_code = models.CharField(max_length=20, blank=False, null=False, default='')
     # The postal code of the address
-    country = models.CharField(max_length=100)
+    country = models.CharField(max_length=100, blank=False, null=False, default='')
     # The country of the address
-    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True, default='')
     # The phone number associated with this address (optional)
-    location_lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    mobile_number = models.CharField(max_length=20, blank=False, null=False, default='')
+    # The mobile number associated with this address (optional)
+    email = models.EmailField(blank=True, null=True, default='')
+    # The email address associated with this address (optional)
+    location_lat = models.DecimalField(max_digits=22, decimal_places=18, null=False, blank=False, default='')
     # The latitude of the location (from Google Maps)
-    location_long = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    location_long = models.DecimalField(max_digits=22, decimal_places=18, null=False, blank=False, default='')
     # The longitude of the location (from Google Maps)
     default = models.BooleanField(default=False)
     # Whether this address is the default address for the user
@@ -123,12 +149,24 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = "Addresses"
         # Plural name for the model in the admin interface
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'address_name'], name='unique_address_name_per_user')
+        ]
+
+class AvailableSlot(models.Model):
+    date = models.DateField()
+    time_start = models.TimeField()
+    time_end = models.TimeField()
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.date} from {self.time_start} to {self.time_end}"
 
 class Coupon(models.Model):
     code = models.CharField(max_length=50, unique=True)
     # The unique code for the coupon
-    discount = models.PositiveIntegerField()
-    # The discount percentage that this coupon offers
+    discount_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    # The discount that this coupon offers
     valid_from = models.DateTimeField()
     # The date and time from which the coupon is valid
     valid_to = models.DateTimeField()
@@ -137,4 +175,4 @@ class Coupon(models.Model):
     # Whether the coupon is currently active and can be used
 
     def __str__(self):
-        return f"Coupon {self.code} ({self.discount}% off)"
+        return f"Coupon {self.code} - {self.discount_amount} off"
