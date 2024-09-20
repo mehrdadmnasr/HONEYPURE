@@ -1,12 +1,14 @@
+{% load i18n %}
+
 <!-- Top header start -->
 <header class="top-header th-2 top-header-bg">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-7">
                 <div class="list-inline">
-                    <a href="tel:+98-912-425-8675"><i class="fa fa-phone"></i>+98-9124258675</a>
-                    <a href="email:mehrdad.m.nasr@gmail.com"><i class="fa fa-envelope"></i>mehrdad.m.nasr@gmail.com</a>
-                    <a href="#"><i class="fa fa-clock-o"></i>Mon - Sun: 8:00am - 6:00pm</a>
+                    <a href="tel:+98-912-425-8675"><i class="fa fa-phone"></i>{% trans "+98-9124258675" %}</a>
+                    <a href="email:mehrdad.m.nasr@gmail.com"><i class="fa fa-envelope"></i>{% trans "mehrdad.m.nasr@gmail.com" %}</a>
+                    <a href="#"><i class="fa fa-clock-o"></i>{% trans "Mon - Sun: 8:00am - 6:00pm" %}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5">
@@ -14,11 +16,11 @@
 
                   {% if user.is_authenticated %}
                   <li>
-                      <a href="{% url 'dashboard' %}" class="sign-in"><i class="fa fa-tachometer"></i> Dashboard</a>
+                      <a href="{% url 'dashboard' %}" class="sign-in"><i class="fa fa-tachometer"></i> {% trans "Dashboard" %}</a>
                   </li>
 
                   <li>
-                    <a href="javascript:{document.getElementById('logout').submit()}" class="sign-in"><i class="fa fa-sign-out"></i> Logout</a>
+                    <a href="javascript:{document.getElementById('logout').submit()}" class="sign-in"><i class="fa fa-sign-out"></i> {% trans "Logout" %}</a>
                     <form action="{% url 'logout' %}" id="logout" method="POST">
                       {% csrf_token %}
                       <input type="hidden">
@@ -26,10 +28,10 @@
                   </li>
                   {% else %}
                   <li>
-                      <a href="{% url 'login' %}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                      <a href="{% url 'login' %}" class="sign-in"><i class="fa fa-sign-in"></i> {% trans "Login" %}</a>
                   </li>
                   <li>
-                      <a href="{% url 'register' %}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                      <a href="{% url 'register' %}" class="sign-in"><i class="fa fa-user"></i> {% trans "Register" %}</a>
                   </li>
                   {% endif %}
                 </ul>

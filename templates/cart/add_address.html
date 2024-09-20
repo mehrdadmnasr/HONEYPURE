@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+
 {% block content %}
 
 <div class="container">
-    <h2>Add New Address</h2>
+    <h2>{% trans "Add New Address" %}</h2>
 
     <!-- فرم برای دریافت آدرس -->
     <form method="POST" id="address-form" novalidate>
@@ -16,8 +19,8 @@
         {% endif %}
 
         <div class="form-group">
-            <label for="address-input">Enter your address:</label>
-            <input type="text" id="address-input" class="form-control" placeholder="Enter your address">
+            <label for="address-input">{% trans "Enter your address" %}: </label>
+            <input type="text" id="address-input" class="form-control" placeholder="{% trans 'Enter your address' %}">
         </div>
 
         <!-- نقشه گوگل -->
@@ -26,7 +29,7 @@
         <!-- فیلدهای فرم آدرس -->
         {% include 'cart/address_form.html' %}
 
-        <button type="submit" class="btn btn-primary mt-3 mb-3">Save Address</button>
+        <button type="submit" class="btn btn-primary mt-3 mb-3">{% trans "Save Address" %}</button>
     </form>
 </div>
 

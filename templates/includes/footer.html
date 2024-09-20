@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!-- Footer start -->
@@ -6,26 +7,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 foot-about">
-                    <h4>About US</h4>
+                    <h4>{% trans "About US" %}</h4>
 
-                    <p>Our company is dedicated to the art of honey production, bringing you the finest honey from the most pristine environments. </p>
+                    <p>{% trans "Our company is dedicated to the art of honey production, bringing you the finest honey from the most pristine environments. " %}</p>
 
                     <ul>
-                        <li>23 Rose Stren Melbourn</li>
-                        <li>sales@smarteyeapps.com</li>
-                        <li>+91 876 766 554</li>
+                        <li>{% trans "23 Rose Stren Melbourn" %}</li>
+                        <li>{% trans "sales@smarteyeapps.com" %}</li>
+                        <li>{% trans "+91 876 766 554" %}</li>
                     </ul>
                 </div>
 
                 <div class="col-md-3 foot-post">
-                    <h4>Latest Posts</h4>
+                    <h4>{% trans "Latest Posts" %}</h4>
 
                     <div class="post-row">
                         <div class="image">
                             <img src="{% static 'images/blog/b4.jpg' %}" alt="">
                         </div>
                         <div class="detail">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit </p>
+                            <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit " %}</p>
                         </div>
                     </div>
 
@@ -34,7 +35,7 @@
                             <img src="{% static 'images/blog/b3.jpg' %}" alt="">
                         </div>
                         <div class="detail">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit </p>
+                            <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit " %}</p>
                         </div>
                     </div>
 
@@ -43,30 +44,30 @@
                             <img src="{% static 'images/blog/b2.jpg' %}" alt="">
                         </div>
                         <div class="detail">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit </p>
+                            <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit " %}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-3 foot-services">
-                    <h4>Top Category</h4>
+                    <h4>{% trans "Top Category" %}</h4>
 
                     <ul>
-                        <li><a href="">Target Statergy</a></li>
-                        <li><a href="">Web Analytics</a></li>
-                        <li><a href="">Page Monitering</a></li>
-                        <li><a href="">Page Optimization</a></li>
-                        <li><a href="">Target Statergy</a></li>
-                        <li><a href="">Email Marketing</a></li>
+                        <li><a href="">{% trans "Target Statergy" %}</a></li>
+                        <li><a href="">{% trans "Web Analytics" %}</a></li>
+                        <li><a href="">{% trans "Page Monitering" %}</a></li>
+                        <li><a href="">{% trans "Page Optimization" %}</a></li>
+                        <li><a href="">{% trans "Target Statergy" %}</a></li>
+                        <li><a href="">{% trans "Email Marketing" %}</a></li>
                     </ul>
                 </div>
 
                 <div class="col-md-3 foot-news">
-                    <h4>News Letter</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, vehicula eget eros. </p>
+                    <h4>{% trans "News Letter" %}</h4>
+                    <p>{% trans "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, vehicula eget eros. " %}</p>
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control mb-0" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control mb-0" placeholder="{% trans 'Recipient\'s username' %}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-primary" id="basic-addon2"><i class="bi text-white bi-send"></i></span>
                         </div>
@@ -86,7 +87,7 @@
 </footer>
 <div class="copy">
     <div class="container">
-        <a href="https://www.smarteyeapps.com/">2022 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps.com</a>
+        <a href="https://www.smarteyeapps.com/">{% trans "2022 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps.com" %}</a>
 
         <span>
             <a href=""><i class="bi bi-github"></i></a>

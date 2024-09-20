@@ -1,37 +1,39 @@
   {% extends 'base.html' %}
 
-  {% block title %} | Payment {% endblock %}
+  {% load i18n %}
+
+  {% block title %} | {% trans block.super %} {% trans "Payment" %} {% endblock %}
   {% block content %}
 
   <div class="container-fluid bg-light py-5">
       <div class="container">
-          <h1 class="mb-4">Payment</h1>
+          <h1 class="mb-4">{% trans "Payment" %}</h1>
 
           <form action="{% url 'process_payment' %}" method="post">
               {% csrf_token %}
               <fieldset>
-                  <legend>Select Payment Method</legend>
+                  <legend>{% trans "Select Payment Method" %}</legend>
                   <div class="form-check">
                       <input class="form-check-input" type="radio" id="paypal" name="payment_method" value="paypal">
                       <label class="form-check-label" for="paypal">
-                          PayPal
+                          {% trans "PayPal" %}
                       </label>
                   </div>
                   <div class="form-check">
                       <input class="form-check-input" type="radio" id="credit_card" name="payment_method" value="credit_card">
                       <label class="form-check-label" for="credit_card">
-                          Credit Card
+                          {% trans "Credit Card" %}
                       </label>
                   </div>
                   <div class="form-check">
                       <input class="form-check-input" type="radio" id="bank_transfer" name="payment_method" value="bank_transfer">
                       <label class="form-check-label" for="bank_transfer">
-                          Bank Transfer
+                          {% trans "Bank Transfer" %}
                       </label>
                   </div>
               </fieldset>
 
-              <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+              <button type="submit" class="btn btn-primary">{% trans "Proceed to Payment" %}</button>
           </form>
       </div>
   </div>

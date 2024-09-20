@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} | {{single_product.product_title}} {% endblock %}
-{% block content %}
-
+{% load i18n %}
 {% load static %}
 {% load humanize %}
 {% load custom_filters %}
+
+{% block title %} | {{single_product.product_title}} {% endblock %}
+{% block content %}
 
 <!--  ************************* Page Title Starts Here ************************** -->
 <div class="page-nav no-margin row">
@@ -14,12 +15,12 @@
             <h2 class="text-start">{{single_product.product_title}}</h2>
             <ul>
               {% if request.GET.source == 'home' %}
-                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> {% trans "Home" %}</a></li>
               {% elif request.GET.source == 'products' %}
-                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
-                  <li> <a href="{% url 'products' %}"><i class="bi bi-chevron-double-right pe-2"></i><i class="fa fa-gg"></i> Products</a></li>
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> {% trans "Home" %}</a></li>
+                  <li> <a href="{% url 'products' %}"><i class="bi bi-chevron-double-right pe-2"></i><i class="fa fa-gg"></i> {% trans "Products" %}</a></li>
               {% else %}
-                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
+                  <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> {% trans "Home" %}</a></li>
               {% endif %}
                 <li><i class="bi bi-chevron-double-right pe-2"></i> >{{single_product.product_title}}</li>
             </ul>
@@ -35,7 +36,7 @@
                 <img src="{{single_product.product_photo.url}}" alt="{{single_product.product_title}}">
             </div>
             <div class="col-md-7">
-                <h2>{{single_product.product_title}} pure Organic</h2>
+                <h2>{{single_product.product_title}} {% trans "pure Organic" %}</h2>
                 <div id="text_completed" style="text-align: justify;">{{single_product.description | truncate_lines:100 | safe}} </div>
                 <b class="fs-3 py-4">$ {{single_product.price | intcomma}}</b>
                 <span class="fs-5 ps-3 text-danger text-decoration-line-through">$ {{single_product.old_price | intcomma}}</span>
@@ -72,19 +73,19 @@
                    {% csrf_token %}
                    <div class="row">
                        <div class="col-md-3">
-                           <label for="quantity" class="form-label">Quantity:</label>
+                           <label for="quantity" class="form-label">{% trans "Quantity" %}: </label>
                            <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
                        </div>
                        <div class="col-md-3">
-                           <button type="submit" class="btn btn-primary mt-4">Add to Cart</button>
+                           <button type="submit" class="btn btn-primary mt-4">{% trans "Add to Cart" %}</button>
                        </div>
                    </div>
                 </form>
-                
+
             </div>
         </div>
         <div class="row product-detail">
-           <h4>Product Detail</h4>
+           <h4>" %}Product Detail" %}</h4>
             <div class="mb-3" id="text_completed" style="text-align: justify;">{{single_product.detail | truncate_lines:100 | safe}}</div>
           </div>
       </div>
@@ -94,7 +95,7 @@
  <div class="container-fluid bg-honey px-4 py-5">
      <div class="container">
          <div class="row reviews-section">
-             <h4>Reviews</h4>
+             <h4>" %}Reviews" %}</h4>
              <div id="reviews-container">
                  {% for review in reviews %}
 
@@ -126,9 +127,9 @@
 
                         <div class="review-text">
                              {% if review.verified_purchase %}
-                                  Verified Purchase
+                                  {% trans "Verified Purchase" %}
                              {% else %}
-                                  Unverified Purchase
+                                  {% trans "Unverified Purchase" %}
                              {% endif %}
                         </div>
                     </div>
@@ -142,26 +143,26 @@
          </div>
          <!-- Review Form -->
          <div class="row review-form-section">
-             <h4>Write a Review</h4>
+             <h4>{% trans "Write a Review" %}</h4>
              <form id="review-form" method="post" action="">
                  {% csrf_token %}
                  <div class="mb-3">
-                     <label for="reviewer_name" class="form-label">Name:</label>
+                     <label for="reviewer_name" class="form-label">{% trans "Name" %}:</label>
                      <input type="text" id="reviewer_name" name="reviewer_name" class="form-control" required>
                  </div>
                  <div class="mb-3">
-                     <label for="review_text" class="form-label">Review Text:</label>
+                     <label for="review_text" class="form-label">{% trans "Review Text" %}:</label>
                      <textarea id="review_text" name="review_text" class="form-control" required></textarea>
                  </div>
                  <div class="mb-3">
-                     <label for="rating" class="form-label">Rating:</label>
+                     <label for="rating" class="form-label">{% trans "Rating" %}:</label>
                      <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
                  </div>
                  <div class="mb-3 form-check">
                      <input type="checkbox" id="verified_purchase" name="verified_purchase" class="form-check-input" disabled>
-                     <label for="verified_purchase" class="form-check-label">Verified Purchase</label>
+                     <label for="verified_purchase" class="form-check-label">{% trans "Verified Purchase" %}</label>
                  </div>
-                 <button type="submit" class="btn btn-primary">Submit Review</button>
+                 <button type="submit" class="btn btn-primary">{% trans "Submit Review" %}</button>
              </form>
          </div>
      </div>

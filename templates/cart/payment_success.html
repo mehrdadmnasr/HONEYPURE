@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %} | Payment Success {% endblock %}
+{% load i18n %}
+
+{% block title %} | {% trans block.super %} {% trans "Payment Success" %} {% endblock %}
 {% block content %}
 
 <div class="container-fluid bg-light py-5">
     <div class="container">
-        <h1 class="mb-4">Payment Successful</h1>
-        <p>Thank you for your purchase! Your payment has been successfully processed.</p>
-        <a href="{% url 'order_confirmation' %}" class="btn btn-primary">View Order Confirmation</a>
+        <h1 class="mb-4">{% trans "Payment Successful" %}</h1>
+        <p>{% trans "Thank you for your purchase! Your payment has been successfully processed." %}</p>
+        <a href="{% url 'order_confirmation' %}" class="btn btn-primary">{% trans "View Order Confirmation" %}</a>
     </div>
 </div>
 

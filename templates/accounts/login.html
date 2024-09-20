@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %} | Login {% endblock %}
-{% block content %}
-
+{% load i18n %}
 {% load static %}
 {% load socialaccount %}
 {% providers_media_js %}
+
+{% block title %} | {% trans block.super %} {% trans "Login" %} {% endblock %}
+{% block content %}
 
 <!--  ************************* Page Title Starts Here ************************** -->
 <div class="page-nav no-margin row">
    <div class="container">
        <div class="row">
-           <h2 class="text-start">Login Account</h2>
+           <h2 class="text-start">{% trans "Login Account" %}</h2>
            <ul>
-               <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
-               <li><i class="bi bi-chevron-double-right pe-2"></i> Login</li>
+               <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> {% trans "Home" %}</a></li>
+               <li><i class="bi bi-chevron-double-right pe-2"></i> {% trans "Login" %}</li>
            </ul>
        </div>
    </div>
@@ -28,37 +29,37 @@
                 <div class="form-section">
                     <div class="logo-2">
                         <a href="{% url 'home' %}">
-                            <img src="{% static 'images/logo-Honey_Pure-en.png' %}" style="transform: scale(1.5);" alt="logo">
+                            <img src="{% static 'images/logo-Honey_Pure-en.png' %}" style="transform: scale(1.5);" alt="{% trans 'logo' %}">
                         </a>
                     </div>
                     <div class="mb-4"></div> <!-- فاصله ریسپانسیو -->
-                    <h3>Sign into your account</h3>
+                    <h3>{% trans "Sign into your account" %}</h3>
                     {% include 'includes/messages.html' %}
                     <form action="{% url 'login' %}" method="POST">
                       {% csrf_token %}
                       {{ form.as_p }}
                         <input type="hidden" name="next" value="{{ next }}">
                         <div class="form-group form-box">
-                            <input type="text" name="username" class="input-text" placeholder="Username" required>
+                            <input type="text" name="username" class="input-text" placeholder="{% trans 'Username' %}" %}" required>
                             <i class="flaticon-mail"></i>
                         </div>
                         <div class="form-group form-box">
-                            <input type="password" name="password" class="input-text" placeholder="Password" required>
+                            <input type="password" name="password" class="input-text" placeholder="{% trans 'Password' %}" required>
                             <i class="flaticon-lock"></i>
                         </div>
                         <div class="form-group mb-0 clearfix">
-                            <button type="submit" class="btn-md btn-theme float-start btn-primary">Login</button>
+                            <button type="submit" class="btn-md btn-theme float-start btn-primary">{% trans "Login" %}</button>
                         </div>
                         <div class="extra-login clearfix">
-                            <span>Or Login With</span>
+                            <span>{% trans "Or Login With" %}</span>
                         </div>
                         <div class="clearfix"></div>
                         <ul class="social-list">
-                            <li><a href="{% provider_login_url 'facebook' method='oauth2' %}" class="facebook-bg"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
-                            <li><a href="{% provider_login_url 'google' %}" class="google-bg"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
+                            <li><a href="{% provider_login_url 'facebook' method='oauth2' %}" class="facebook-bg"><i class="fa fa-facebook facebook-i"></i><span>{% trans "Facebook" %}</span></a></li>
+                            <li><a href="{% provider_login_url 'google' %}" class="google-bg"><i class="fa fa-google google-i"></i><span>{% trans "Google" %}</span></a></li>
                         </ul>
                     </form>
-                    <p>Don't have an account? <a href="{% url 'register' %}" class="thembo"> Register here</a></p>
+                    <p>{% trans "Don't have an account?" %} <a href="{% url 'register' %}" class="thembo"> {% trans "Register here" %}</a></p>
                 </div>
             </div>
         </div>

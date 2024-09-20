@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} | Home {% endblock %}
-{% block content %}
-
+{% load i18n %}
 {% load static %}
 {% load custom_filters %}
+
+{% block title %} | {% trans block.super %} {% trans "Home" %} {% endblock %}
+{% block content %}
+
 
 <!-- ##################### Slider Starts Here #################### -->
 
@@ -21,11 +23,11 @@
       <div class="carousel-caption   d-md-block">
           <div class="row">
                <div class="col-lg-6 text-start ">
-                  <h1 class="fs-12 fw-bolder text-start ">Natural Honey <br><span class="text-primary">online shop</span> </h1>
-                  <p class="text-dark d-none d-md-block text-start">Experience the purest form of sweetness. Our Natural Honey is harvested straight from the hive, preserving all the natural enzymes and nutrients. Perfect for your daily wellness routine. </p>
+                  <h1 class="fs-12 fw-bolder text-start ">{% trans "Natural Honey" %}<br><span class="text-primary">{% trans "online shop" %}</span> </h1>
+                  <p class="text-dark d-none d-md-block text-start">{% trans "Experience the purest form of sweetness. Our Natural Honey is harvested straight from the hive, preserving all the natural enzymes and nutrients. Perfect for your daily wellness routine." %} </p>
                   <div class="d-inline-block pt-5 text-start d-none d-lg-block">
-                      <button class="btn btn-primary shadow fs-5 fw-bolder px-5 py-2">Buy Now</button>
-                      <button class="btn btn-outline-primary ms-4 shadow fs-5 fw-bolder px-5 py-2">Buy Now</button>
+                      <button class="btn btn-primary shadow fs-5 fw-bolder px-5 py-2">{% trans "Buy Now" %}</button>
+                      <button class="btn btn-outline-primary ms-4 shadow fs-5 fw-bolder px-5 py-2">{% trans "Buy Now" %}</button>
                   </div>
                </div>
                <div class="col-lg-6 d-none d-lg-block">
@@ -39,11 +41,11 @@
       <div class="carousel-caption  d-md-block">
           <div class="row">
                <div class="col-lg-6">
-                  <h1 class="fs-12 fw-bolder text-start">Organic Honey <br><span class="text-primary">online shop</span> </h1>
-                  <p class="d-none d-md-block text-dark text-start">Indulge in the richness of Organic Honey, sourced from organically managed farms. Free from chemicals and pesticides, it's a healthy choice for you and your family.</p>
+                  <h1 class="fs-12 fw-bolder text-start">{% trans "Organic Honey " %}<br><span class="text-primary">{% trans "online shop" %}</span> </h1>
+                  <p class="d-none d-md-block text-dark text-start">{% trans "Indulge in the richness of Organic Honey, sourced from organically managed farms. Free from chemicals and pesticides, it's a healthy choice for you and your family." %}</p>
                   <div class="d-inline-block pt-5 text-start d-none d-lg-block">
-                      <button class="btn btn-primary shadow fs-5 fw-bolder px-5 py-2">Buy Now</button>
-                      <button class="btn btn-outline-primary ms-4 shadow fs-5 fw-bolder px-5 py-2">Buy Now</button>
+                      <button class="btn btn-primary shadow fs-5 fw-bolder px-5 py-2">{% trans "Buy Now" %}</button>
+                      <button class="btn btn-outline-primary ms-4 shadow fs-5 fw-bolder px-5 py-2">{% trans "Buy Now" %}</button>
                   </div>
                </div>
                <div class="col-lg-6 d-none d-lg-block">
@@ -56,11 +58,11 @@
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"><i class="bi fs-4 text-dark bi-chevron-left"></i></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">{% trans "Previous" %}</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"><i class="bi fs-4 text-dark bi-chevron-right"></i></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">{% trans "Next" %}</span>
   </button>
 </div>
 
@@ -68,36 +70,36 @@
  <div class="container-fluid products big-padding pt-3">
    <div class="container-xl">
        <div class="section-title row">
-            <h2 class="fs-1 fw-bold">Why Choos our Honey</h2>
-            <p>Discover why our honey stands out from the rest. We offer premium, pure, and natural honey that’s sustainably sourced and carefully packaged.</p>
+            <h2 class="fs-1 fw-bold">{% trans "Why Choos our Honey" %}</h2>
+            <p>{% trans "Discover why our honey stands out from the rest. We offer premium, pure, and natural honey that’s sustainably sourced and carefully packaged." %}"</p>
         </div>
        <div class="row mt-5">
            <div class="col-lg-3 mb-4 col-md-6">
                <div class="cover text-center">
                    <img class="w-125" src="{% static 'images/icon/honeycomb.png' %}" alt="">
-                   <h2 class="fs-3 fw-bolder mt-4">Organic Honey</h2>
-                   <p id="text_completed" style="text-align: justify;">Our Organic Honey is certified and sourced from organic farms. Enjoy a product free from synthetic additives and chemicals, delivering a pure and natural taste. </p>
+                   <h2 class="fs-3 fw-bolder mt-4">{% trans "Organic Honey" %}</h2>
+                   <p id="text_completed" style="text-align: justify;">{% trans "Our Organic Honey is certified and sourced from organic farms. Enjoy a product free from synthetic additives and chemicals, delivering a pure and natural taste. " %}</p>
                </div>
            </div>
            <div class="col-lg-3 mb-4 col-md-6">
                <div class="cover text-center">
                    <img class="w-125" src="{% static 'images/icon/bee.png' %}" alt="">
-                   <h2 class="fs-3 fw-bolder mt-4">Queen Bee Honey</h2>
-                   <p id="text_completed" style="text-align: justify;">Harvested with care, our Queen Bee Honey is a luxurious treat, rich in royal jelly. It offers a unique taste and numerous health benefits, fit for royalty. </p>
+                   <h2 class="fs-3 fw-bolder mt-4">{% trans "Queen Bee Honey" %}</h2>
+                   <p id="text_completed" style="text-align: justify;">{% trans "Harvested with care, our Queen Bee Honey is a luxurious treat, rich in royal jelly. It offers a unique taste and numerous health benefits, fit for royalty. " %}</p>
                </div>
            </div>
            <div class="col-lg-3 mb-4 col-md-6">
                <div class="cover text-center">
                    <img class="w-125" src="{% static 'images/icon/honey.png' %}" alt="">
-                   <h2 class="fs-3 fw-bolder mt-4">Hygienic Packing </h2>
-                   <p id="text_completed" style="text-align: justify;">Our honey is packaged in a state-of-the-art, hygienic facility, ensuring that it reaches you in the purest form, untouched and free from contaminants. </p>
+                   <h2 class="fs-3 fw-bolder mt-4">{% trans "Hygienic Packing" %}</h2>
+                   <p id="text_completed" style="text-align: justify;">{% trans "Our honey is packaged in a state-of-the-art, hygienic facility, ensuring that it reaches you in the purest form, untouched and free from contaminants. " %}</p>
                </div>
            </div>
            <div class="col-lg-3 mb-4 col-md-6">
                <div class="cover text-center">
                    <img class="w-125" src="{% static 'images/icon/fast.png' %}" alt="">
-                   <h2 class="fs-3 fw-bolder mt-4">Fast Delivery </h2>
-                   <p id="text_completed" style="text-align: justify;">We understand the importance of timely delivery. That's why we ensure your favorite honey is delivered quickly and safely, right to your doorstep. </p>
+                   <h2 class="fs-3 fw-bolder mt-4">{% trans "Fast Delivery" %}</h2>
+                   <p id="text_completed" style="text-align: justify;">{% trans "We understand the importance of timely delivery. That's why we ensure your favorite honey is delivered quickly and safely, right to your doorstep. " %}</p>
                </div>
            </div>
        </div>
@@ -109,8 +111,8 @@
 <div class="container-fluid products big-padding px-3 bg-honey">
     <div class="container-xl">
         <div class="section-title row">
-             <h2 class="fs-1 fw-bold">Our Products</h2>
-             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+             <h2 class="fs-1 fw-bold">{% trans "Our Products" %}</h2>
+             <p>{% trans "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor ipsum dolor sit amet, consectetuer adipiscing elit." %}</p>
          </div>
          <div class="row">
              {% for product in all_products %}
@@ -126,7 +128,7 @@
                                {% endif %}
                            </div>
                            <div class="d-inline-block mt-3">
-                               <button class="btn btn-primary px-5">Buy Now</button>
+                               <button class="btn btn-primary px-5">{% trans "trans Buy Now" %}</button>
                            </div>
                        </div>
                    </a>
@@ -153,16 +155,16 @@
 <div class="about-us big-padding">
     <div class="container-lg">
         <div class="section-title">
-            <p>Help us to Achieve our Goal</p>
-            <h2>About Our Company</h2>
+            <p>{% trans "Help us to Achieve our Goal" %}</p>
+            <h2>{% trans "About Our Company" %}</h2>
         </div>
         <div class="about-row row">
             <div class="col-md-7">
                 <div class="abut-detail fs-6">
 
-                    <p class="mb-3" style="text-align: justify;"> Our company is dedicated to the art of honey production, bringing you the finest honey from the most pristine environments. We source our honey from beekeepers who practice sustainable beekeeping methods, ensuring that every jar we deliver is of the highest quality. Our mission is to provide pure, unadulterated honey that retains all the natural goodness and health benefits that nature intended. </p>
-                     <p class="mb-3" style="text-align: justify;"> We believe in the power of nature and strive to preserve it in every step of our production process. From the moment our bees begin gathering nectar to the time the honey is bottled, we maintain rigorous quality control to ensure purity and authenticity. Our commitment to sustainability goes beyond just honey production; it extends to our packaging, distribution, and every aspect of our business operations. </p>
-                      <p class="mb-4" style="text-align: justify;"> As a customer-focused company, we are dedicated to exceeding your expectations. We continually innovate to bring you new and exciting honey products, while staying true to our core values of quality, sustainability, and transparency. Whether you are a long-time honey lover or new to its wonders, we are here to provide you with an exceptional honey experience that you can trust. </p>
+                    <p class="mb-3" style="text-align: justify;">{% trans " Our company is dedicated to the art of honey production, bringing you the finest honey from the most pristine environments. We source our honey from beekeepers who practice sustainable beekeeping methods, ensuring that every jar we deliver is of the highest quality. Our mission is to provide pure, unadulterated honey that retains all the natural goodness and health benefits that nature intended. " %}</p>
+                     <p class="mb-3" style="text-align: justify;">{% trans " We believe in the power of nature and strive to preserve it in every step of our production process. From the moment our bees begin gathering nectar to the time the honey is bottled, we maintain rigorous quality control to ensure purity and authenticity. Our commitment to sustainability goes beyond just honey production; it extends to our packaging, distribution, and every aspect of our business operations. " %}</p>
+                      <p class="mb-4" style="text-align: justify;">{% trans " As a customer-focused company, we are dedicated to exceeding your expectations. We continually innovate to bring you new and exciting honey products, while staying true to our core values of quality, sustainability, and transparency. Whether you are a long-time honey lover or new to its wonders, we are here to provide you with an exceptional honey experience that you can trust. " %}</p>
                 </div>
 
 
@@ -180,8 +182,8 @@
 
 
      <div class="section-title row mb-3">
-        <h2 class="fw-bolder">Testimonial</h2>
-        <p>Hear from those who know us best—our dedicated team members. Their passion and expertise drive our commitment to quality. </p>
+        <h2 class="fw-bolder">{% trans "Testimonial" %}</h2>
+        <p>{% trans "Hear from those who know us best—our dedicated team members. Their passion and expertise drive our commitment to quality. " %}</p>
     </div>
     <div class="row mt-5">
 
@@ -204,7 +206,7 @@
                 </div>
                 <div class="det text-center">
                     <a href="{% url 'team_detail' team.id %}?source=home" class="fs-7 fst-italic" id="text_continue">{{ team.description|safe }}</a>
-                    <a href="{% url 'team_detail' team.id %}?source=home" class="read-more">Show more ...</a>
+                    <a href="{% url 'team_detail' team.id %}?source=home" class="read-more">{% trans "Show more" %} ...</a>
                 </div>
            </div>
         </div>
@@ -220,7 +222,7 @@
     <div class="container">
         <div class="section-title row mb-3">
             <h2 class="fw-bolder">Blog</h2>
-            <p>Stay updated with the latest from the world of honey. Our blog features tips, recipes, and insights into the benefits of honey, helping you make the most of this natural treasure. Explore now to enrich your honey knowledge. </p>
+            <p>{% trans "Stay updated with the latest from the world of honey. Our blog features tips, recipes, and insights into the benefits of honey, helping you make the most of this natural treasure. Explore now to enrich your honey knowledge. " %}"</p>
         </div>
         <div class="row mt-5">
 

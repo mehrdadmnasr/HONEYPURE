@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %} | Products {% endblock %}
-{% block content %}
-
+{% load i18n %}
 {% load static %}
+
+{% block title %} | {% trans block.super %} {% trans "Products" %} {% endblock %}
+{% block content %}
 
 <!--  ************************* Page Title Starts Here ************************** -->
  <div class="page-nav no-margin row">
     <div class="container">
         <div class="row">
-            <h2 class="text-start">Products</h2>
+            <h2 class="text-start">{% trans "Products" %}</h2>
             <ul>
-                <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> Home</a></li>
-                <li><i class="bi bi-chevron-double-right pe-2"></i> Products</li>
+                <li> <a href="{% url 'home' %}"><i class="bi bi-house-door"></i> {% trans "Home" %}</a></li>
+                <li><i class="bi bi-chevron-double-right pe-2"></i> {% trans "Products" %}</li>
             </ul>
         </div>
     </div>
@@ -38,7 +39,7 @@
                          {% endif %}
                      </div>
                      <div class="d-inline-block mt-3">
-                         <button class="btn btn-primary px-5">Buy Now</button>
+                         <button class="btn btn-primary px-5">{% trans "Buy Now" %}</button>
                      </div>
                  </div>
              </a>

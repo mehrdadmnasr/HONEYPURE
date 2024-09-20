@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load humanize %}
 
@@ -19,32 +20,32 @@
                                   <form action="{% url 'logout' %}" method="post" class="d-inline">
                                       {% csrf_token %}
                                       <button type="submit" class="btn btn-primary btn-custom">
-                                          <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                          <i class="bi bi-box-arrow-right me-2"></i>{% trans "Logout" %}
                                       </button>
                                   </form>
                               </li>
                               <li class="float-end py-2 px-3">
                                   <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary btn-custom">
-                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart_total_items }})
+                                      <i class="bi bi-cart me-2"></i>{% trans "Cart" %} ({{ cart_total_items }})
                                   </a>
                               </li>
                               <li class="float-end py-2 px-3">
-                                  <span class="btn btn-outline-secondary btn-custom">Hello, {{ user.username }}</span>
+                                  <span class="btn btn-outline-secondary btn-custom">{% trans "Hello," %} {{ user.username }}</span>
                               </li>
                           {% else %}
                               <li class="float-end py-2 px-3">
                                   <a href="{% url 'register' %}" class="btn btn-primary btn-custom">
-                                      <i class="bi bi-person-plus-fill me-2"></i>Register
+                                      <i class="bi bi-person-plus-fill me-2"></i>{% trans "Register" %}
                                   </a>
                               </li>
                               <li class="float-end py-2 px-3">
                                   <a href="{% url 'login' %}" class="btn btn-outline-primary btn-custom">
-                                      <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                                      <i class="bi bi-box-arrow-in-right me-2"></i>{% trans "Login" %}
                                   </a>
                               </li>
                               <li class="float-end py-2 px-3">
                                   <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary btn-custom">
-                                      <i class="bi bi-cart me-2"></i>Cart ({{ cart_total_items }})
+                                      <i class="bi bi-cart me-2"></i>{% trans "Cart" %} ({{ cart_total_items }})
                                   </a>
                               </li>
                           {% endif %}
@@ -52,11 +53,11 @@
                     </div>
                     <div class="row float-end">
                         <ul class="fw-bold float-start nacul fs-7">
-                            <li class="float-start py-1 px-3"><a href="{% url 'home' %}" class="aclass">Home</a></li>
-                            <li class="float-start py-1 px-3"><a href="{% url 'about' %}" class="aclass">About Us</a></li>
-                            <li class="float-start py-1 px-3"><a href="{% url 'products' %}" class="aclass">Products</a></li>
-                            <li class="float-start py-1 px-3"><a href="{% url 'blog' %}" class="aclass">Blog</a></li>
-                            <li class="float-start py-1 px-3"><a href="{% url 'contact' %}" class="aclass">Contact Us</a></li>
+                            <li class="float-start py-1 px-3"><a href="{% url 'home' %}" class="aclass">{% trans "Home" %}</a></li>
+                            <li class="float-start py-1 px-3"><a href="{% url 'about' %}" class="aclass">{% trans "About Us" %}</a></li>
+                            <li class="float-start py-1 px-3"><a href="{% url 'products' %}" class="aclass">{% trans "Products" %}</a></li>
+                            <li class="float-start py-1 px-3"><a href="{% url 'blog' %}" class="aclass">{% trans "Blog" %}</a></li>
+                            <li class="float-start py-1 px-3"><a href="{% url 'contact' %}" class="aclass">{% trans "Contact Us" %}</a></li>
                             <!-- دکمه جستجو -->
                             <li class="float-start py-0 px-3">
                                 <button class="btn btn-outline-secondary d-flex align-items-center btn-custom" style="border: none;">

@@ -1,5 +1,7 @@
+{% load i18n %}
+
 <div class="form-group">
-    <label for="address-details">Address Details (auto-filled):</label>
+    <label for="address-details">{% trans "Address Details (auto-filled)" %}: </label>
     <input type="text" id="address-details" name="address_details" class="form-control {% if form.address_details.errors %}is-invalid{% endif %}" value="{{ form.address_details.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.address_details.errors %}
@@ -8,7 +10,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="address_name">Address Title</label>
+    <label for="address_name">{% trans "Address Title" %}</label>
     <input type="text" id="address_name" name="address_name" class="form-control {% if form.address_name.errors %}is-invalid{% endif %}" value="{{ form.address_name.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.address_name.errors %}
@@ -18,7 +20,7 @@
 </div>
 <!-- فیلدهای دیگر آدرس -->
 <div class="form-group">
-    <label for="address_line1">Address Line 1:</label>
+    <label for="address_line1">{% trans "Address Line 1" %}:</label>
     <input type="text" id="address_line1" name="address_line1" class="form-control {% if form.address_line1.errors %}is-invalid{% endif %}" value="{{ form.address_line1.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.address_line1.errors %}
@@ -27,11 +29,11 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="address_line2">Address Line 2:</label>
+    <label for="address_line2">{% trans "Address Line 2" %}:</label>
     <input type="text" id="address_line2" name="address_line2" value="{{ form.address_line2.value }}" class="form-control">
 </div>
 <div class="form-group">
-    <label for="city">City:</label>
+    <label for="city">{% trans "City" %}:</label>
     <input type="text" id="city" name="city" class="form-control {% if form.city.errors %}is-invalid{% endif %}" value="{{ form.city.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.city.errors %}
@@ -40,11 +42,11 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="state">State:</label>
+    <label for="state">{% trans "State" %}:</label>
     <input type="text" id="state" name="state" value="{{ form.state.value }}" class="form-control">
 </div>
 <div class="form-group">
-    <label for="country">Country:</label>
+    <label for="country">{% trans "Country" %}:</label>
     <input type="text" id="country" name="country" class="form-control {% if form.country.errors %}is-invalid{% endif %}" value="{{ form.country.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.country.errors %}
@@ -53,7 +55,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="postal_code">Postal Code:</label>
+    <label for="postal_code">{% trans "Postal Code" %}:</label>
     <input type="text" id="postal_code" name="postal_code" class="form-control {% if form.postal_code.errors %}is-invalid{% endif %}" value="{{ form.postal_code.value }}" pattern="\d{5}(-\d{4})?" title="Enter a valid postal code (e.g., 12345 or 12345-6789)" required>
     <div class="invalid-feedback">
         {% for error in form.postal_code.errors %}
@@ -62,12 +64,12 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="phone_number">Phone Number:</label>
+    <label for="phone_number">{% trans "Phone Number" %}:</label>
     <input type="text" id="phone_number" name="phone_number" class="form-control {% if form.phone_number.errors %}is-invalid{% endif %}" value="{{ form.phone_number.value }}" pattern="\d{5,19}" title="Phone number must contain only digits and be between 8 to 19 digits long">
 </div>
 
 <div class="form-group">
-    <label for="mobile_number">Mobile Number:</label>
+    <label for="mobile_number">{% trans "Mobile Number" %}:</label>
     <input type="tel" id="mobile_number" name="mobile_number" class="form-control {% if form.mobile_number.errors %}is-invalid{% endif %}" value="{{ form.mobile_number.value }}" pattern="\d{11,19}" title="Mobile number must contain only digits and be between 11 to 19 digits long" required>
     <div class="invalid-feedback">
         {% for error in form.mobile_number.errors %}
@@ -76,11 +78,11 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="email">Email:</label>
+    <label for="email">{% trans "Email" %}:</label>
     <input type="email" id="email" name="email" value="{{ form.email.value }}" class="form-control">
 </div>
 <div class="form-group">
-    <label for="location_lat">Latitude:</label>
+    <label for="location_lat">{% trans "Latitude" %}:</label>
     <input type="text" id="location_lat" name="location_lat" class="form-control {% if form.location_lat.errors %}is-invalid{% endif %}" value="{{ form.location_lat.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.location_lat.errors %}
@@ -89,7 +91,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="location_long">Longitude:</label>
+    <label for="location_long">{% trans "Longitude" %}:</label>
     <input type="text" id="location_long" name="location_long" class="form-control {% if form.location_long.errors %}is-invalid{% endif %}" value="{{ form.location_long.value }}" required>
     <div class="invalid-feedback">
         {% for error in form.location_long.errors %}

@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %} | Cart {% endblock %}
-{% block content %}
-
+{% load i18n %}
 {% load humanize %}
 {% load custom_filters %}
+
+{% block title %} | {% trans block.super %} {% trans "Cart" %} {% endblock %}
+{% block content %}
 
 <div class="container-fluid bg-light py-5">
     <div class="container">
       {% include 'includes/messages.html' %}
-        <h1 class="mb-4">Cart</h1>
+        <h1 class="mb-4">{% trans "Cart" %}</h1>
 
         {% if items %}
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Unit Price ($)</th>
-                            <th>Item Price ($)</th>
-                            <th>Tax ($)</th>
-                            <th>Toll ($)</th>
-                            <th>Total Price ($)</th>
-                            <th>Actions</th>
+                            <th>{% trans "Product" %}</th>
+                            <th>{% trans "Quantity" %}</th>
+                            <th>{% trans "Unit Price ($)" %}</th>
+                            <th>{% trans "Item Price ($)" %}</th>
+                            <th>{% trans "Tax ($)" %}</th>
+                            <th>{% trans "Toll ($)" %}</th>
+                            <th>{% trans "Total Price ($)" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +36,7 @@
                                     <form action="{% url 'update_cart' item.product.id %}" method="POST">
                                         {% csrf_token %}
                                         <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
                                     </form>
                                 </td>
                                 <td>{{ item.unit_price | floatformat:2 }}</td>
@@ -46,7 +47,7 @@
                                 <td>
                                     <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                        <button type="submit" class="btn btn-danger">{% trans "Remove" %}</button>
                                     </form>
                                 </td>
                             </tr>
@@ -58,23 +59,23 @@
             <form action="{% url 'apply_coupon' %}" method="POST" class="mt-2">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" class="form-control" name="coupon_code" placeholder="Coupon Code">
+                    <input type="text" class="form-control" name="coupon_code" placeholder="{% trans 'Coupon Code' %}">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-success">Apply</button>
+                        <button type="submit" class="btn btn-success">{% trans "Apply" %}</button>
                     </div>
                 </div>
             </form>
             {% endif %}
 
             <!-- نمایش تخفیف -->
-            <h5 class="mt-2">Total Price: ${{ total_price|floatformat:2 }}</h5>
-            <h5 class="text-success mt-3">Discount Applied: -${{ discount_amount|floatformat:2 }}</h5>
+            <h5 class="mt-2">{% trans "Total Price" %}: ${{ total_price|floatformat:2 }}</h5>
+            <h5 class="text-success mt-3">{% trans "Discount Applied" %}: -${{ discount_amount|floatformat:2 }}</h5>
             <!-- قیمت نهایی پس از تخفیف -->
-            <h5 class="mt-3">Final Price: ${{ final_price|floatformat:2 }}</h5>
-            <a href="{% url 'checkout' %}" class="btn btn-primary mt-4">Proceed to Checkout</a>
+            <h5 class="mt-3">{% trans "Final Price" %}: ${{ final_price|floatformat:2 }}</h5>
+            <a href="{% url 'checkout' %}" class="btn btn-primary mt-4">{% trans "Proceed to Checkout" %}</a>
 
         {% else %}
-            <p>Your cart is empty.</p>
+            <p>{% trans "Your cart is empty." %}</p>
         {% endif %}
     </div>
 </div>
