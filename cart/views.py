@@ -146,39 +146,11 @@ def checkout(request):
             messages.error(request, 'Please select a time slot.')
             return redirect('checkout')
 
-        # گرفتن آدرس انتخاب شده توسط کاربر
-        address = get_object_or_404(Address, id=address_id, user=request.user)
-        # گرفتن اسلات انتخاب شده توسط کاربر
-        slot = get_object_or_404(AvailableSlot, id=slot_id)
-        # گرفتن سبد خرید کاربر
-        cart = Cart.objects.get(user=request.user)
+        # ذخیره آدرس و اسلات در session
+        request.session['selected_address_id'] = address_id
+        request.session['selected_slot_id'] = slot_id
+        return redirect('payment')
 
-        # ایجاد سفارش جدید
-        order = Order.objects.create(
-            user=request.user,
-            first_name=request.user.first_name,
-            last_name=request.user.last_name,
-            email=request.user.email,
-            address=address,
-            paid=False,
-            status='Processing',
-            delivery_date=slot.date,
-            delivery_time=f"{slot.time_start} - {slot.time_end}"
-        )
-
-        # ایجاد آیتم‌های سفارش از سبد خرید
-        for item in cart.items.all():
-            OrderItem.objects.create(
-                order=order,
-                product=item.product,
-                price=item.product.price,
-                quantity=item.quantity
-            )
-            item.delete()  # حذف آیتم از سبد خرید پس از ایجاد سفارش
-
-        cart.delete()  # حذف سبد خرید پس از تکمیل سفارش
-        messages.success(request, 'Your order has been placed successfully!')
-        return redirect('order_summary', order_id=order.id)
 
     else:
         # آدرس‌های کاربر و اسلات‌های زمانی قابل دسترسی
@@ -285,7 +257,7 @@ paypalrestsdk.configure({
     "client_secret": settings.PAYPAL_CLIENT_SECRET
 })
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def payment(request):
     """Render the payment page where users can select a payment method."""
     # بررسی اینکه آیا آدرس و اسلات زمانی انتخاب شده‌اند

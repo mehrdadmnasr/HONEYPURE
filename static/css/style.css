@@ -259,20 +259,24 @@ body {
 .btn-primary {
   background-color: #f16f7e;
   border-color: #f16f7e;
+  color: white; /* متن سفید در حالت اولیه */
 }
 .btn-primary:hover {
   background-color: #ffffff !important; /* تغییر رنگ به سفید هنگام hover */
   border-color: #f16f7e !important; /* رنگ مرز به #f16f7e تغییر می‌کند */
   color: #f16f7e;
+  transition: background-color 0.3s, color 0.3s; /* انیمیشن تغییر رنگ */
 }
 .btn-primary:active {
   background-color: #f16f7e !important;
   border-color: #f16f7e !important;
+  color: white !important; /* متن به سفید برمی‌گردد */
 }
 .btn-primary:focus {
   background-color: #f16f7e !important;
   border-color: #f16f7e !important;
   box-shadow: none !important;
+  color: white !important;
 }
 
 .btn-outline-primary {
@@ -282,15 +286,19 @@ body {
 .btn-outline-primary:hover {
   background-color: #f16f7e !important;
   border-color: #f16f7e !important;
+  color: white !important; /* متن سفید در حالت hover */
+  transition: background-color 0.3s, color 0.3s; /* انیمیشن تغییر رنگ */
 }
 .btn-outline-primary:active {
   background-color: #f16f7e !important;
   border-color: #f16f7e !important;
+  color: white !important;
 }
 .btn-outline-primary:focus {
   background-color: #f16f7e !important;
   border-color: #f16f7e !important;
   box-shadow: none !important;
+  color: white !important;
 }
 
 .form-control:focus {

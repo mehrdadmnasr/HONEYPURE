@@ -64,7 +64,7 @@
 
     {% include 'includes/messages.html' %}
     <!-- فرم انتخاب تاریخ و زمان -->
-    <form method="POST" action="{% url 'payment' %}" id="checkout-form">
+    <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
         {% csrf_token %}
 
         <!-- Hidden input برای آدرس انتخاب‌شده -->
