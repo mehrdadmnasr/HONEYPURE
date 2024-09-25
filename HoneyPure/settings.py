@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
+    'translation.apps.TranslationConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 
@@ -141,13 +143,26 @@ USE_TZ = True
 
 LANGUAGES = [
     ('en', 'English'),
-    ('fa', 'Farsi'),
+    ('fa', 'Persian'),
     ('fr', 'French'),
+    ('tr', 'Turkish'),
 ]
 
-LOCALE_PATHS = [
+LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
+)
+
+EXCLUDE_PATHS = [
+    os.path.join(BASE_DIR, 'env'),
+    os.path.join(BASE_DIR, 'AppData'),  # مسیرهای مشکل‌دار
 ]
+
+
+#EXCLUDE_PATHS = [
+#    os.path.join(BASE_DIR, 'env'),
+#    os.path.join(BASE_DIR, 'AppData'),  # مسیرهای مشکل‌دار
+#]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -168,7 +183,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 #messages
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }

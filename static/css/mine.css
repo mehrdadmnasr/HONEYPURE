@@ -1,3 +1,9 @@
+/* rtl.css */
+body {
+    direction: rtl;
+    text-align: right;
+}
+
 #text_continue {
     display: -webkit-box;
     -webkit-line-clamp: 4;

@@ -9,10 +9,10 @@
             <div class="row  p-2">
                 <div class="col-lg-4 p-2">
                     <img class="max-230" src="{% static 'images/logo-Honey_Pure-en.png' %}" alt="">
-                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="{% if LANGUAGE_CODE == 'fa' or LANGUAGE_CODE == 'ar' %}float-start{% else %}float-end{% endif %} d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
                 </div>
                 <div id="menu" class="col-lg-8 d-none d-lg-block">
-                    <div class="row">
+                    <div class="row float-end">
                       <ul>
                           <!-- Add Login and Register buttons -->
                           {% if user.is_authenticated %}
@@ -51,7 +51,7 @@
                           {% endif %}
                         </ul>
                     </div>
-                    <div class="row float-end">
+                    <div class="row float-start">
                         <ul class="fw-bold float-start nacul fs-7">
                             <li class="float-start py-1 px-3"><a href="{% url 'home' %}" class="aclass">{% trans "Home" %}</a></li>
                             <li class="float-start py-1 px-3"><a href="{% url 'about' %}" class="aclass">{% trans "About Us" %}</a></li>
