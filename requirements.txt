@@ -1,0 +1,11 @@
+asgiref==3.8.1
+distlib==0.3.8
+Django==5.0.7
+django-ckeditor==6.7.1
+django-js-asset==2.2.0
+filelock==3.14.0
+platformdirs==4.2.2
+psycopg2==2.9.9
+sqlparse==0.5.1
+tzdata==2024.1
+virtualenv==20.26.2
