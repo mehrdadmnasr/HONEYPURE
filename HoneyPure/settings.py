@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+# for set in liara database
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^cjwd@wl*8&57ku#bc@^#$hrx0zr)4l1tp)d(rs7mo%879_s%0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -101,11 +103,15 @@ WSGI_APPLICATION = 'HoneyPure.wsgi.application'
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'honey_db',
-        'USER': 'postgres',
-        'PASSWORD' : '1682168',
-        'HOST' : 'localhost',
+
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'honey_db',
+        #'USER': 'postgres',
+        #'PASSWORD' : '1682168',
+        #'HOST' : 'localhost',
+
+        # for set in liara database
+        dj_database_url.config(default='postgres://postgres:1682168@localhost:5432/honey_db')
     }
 }
 
