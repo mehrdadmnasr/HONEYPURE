@@ -111,7 +111,8 @@ DATABASES = {
         #'HOST' : 'localhost',
 
         # for set in liara database
-        dj_database_url.config(default='postgres://postgres:1682168@localhost:5432/honey_db')
+        #dj_database_url.config(default='postgres://postgres:1682168@localhost:5432/localhost')
+        dj_database_url.config(default='postgres://root:OeVq9MnPn9aQhRp42Ey37uD7@honeypure-db:5432/honeypure-db')
     }
 }
 
