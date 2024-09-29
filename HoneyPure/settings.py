@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-^cjwd@wl*8&57ku#bc@^#$hrx0zr)4l1tp)d(rs7mo%879_s%0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+# movaghat rooye system khodam meghdar nadarad
+ALLOWED_HOSTS = ['honeypure.liara.run', 'localhost']
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
