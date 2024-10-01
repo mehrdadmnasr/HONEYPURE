@@ -188,7 +188,7 @@ MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
 
-SITE_ID = 2
+SITE_ID = 1
 
 # email sendeing
 EMAIL_HOST = 'smtp.gmail.com'
