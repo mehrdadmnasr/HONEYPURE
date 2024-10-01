@@ -1,0 +1,5 @@
+{
+  "django": {
+    "settingsFile": "HoneyPure/settings.py"
+  }
+}

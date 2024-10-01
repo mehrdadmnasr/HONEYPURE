@@ -31,6 +31,7 @@ DEBUG = False
 
 # movaghat rooye system khodam meghdar nadarad
 ALLOWED_HOSTS = ['honeypure.liara.run', 'localhost']
+#ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
@@ -102,19 +103,18 @@ WSGI_APPLICATION = 'HoneyPure.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'honey_db',
+#        'USER': 'postgres',
+#        'PASSWORD' : '1682168',
+#        'HOST' : 'localhost',
+#    }
 
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'honey_db',
-        #'USER': 'postgres',
-        #'PASSWORD' : '1682168',
-        #'HOST' : 'localhost',
-
-        # for set in liara database
-        #dj_database_url.config(default='postgres://postgres:1682168@localhost:5432/localhost')
-        dj_database_url.config(default='postgres://root:OeVq9MnPn9aQhRp42Ey37uD7@honeypure-db:5432/honeypure-db')
-    }
+    # for set in liara database
+    'default': dj_database_url.config(
+        default='postgres://root:OeVq9MnPn9aQhRp42Ey37uD7@honeypure-db:5432/honeypure-db'
+    )
 }
 
 
@@ -165,13 +165,6 @@ EXCLUDE_PATHS = [
     os.path.join(BASE_DIR, 'AppData'),  # مسیرهای مشکل‌دار
 ]
 
-
-#EXCLUDE_PATHS = [
-#    os.path.join(BASE_DIR, 'env'),
-#    os.path.join(BASE_DIR, 'AppData'),  # مسیرهای مشکل‌دار
-#]
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -203,7 +196,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mehrdad.m.nasr@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
-
 
 PAYPAL_CLIENT_ID = 'your-client-id'
 PAYPAL_CLIENT_SECRET = 'your-client-secret'
