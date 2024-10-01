@@ -197,5 +197,6 @@ EMAIL_HOST_USER = 'mehrdad.m.nasr@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
+
 PAYPAL_CLIENT_ID = 'your-client-id'
 PAYPAL_CLIENT_SECRET = 'your-client-secret'
