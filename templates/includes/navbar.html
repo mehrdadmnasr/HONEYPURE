@@ -7,16 +7,13 @@
     <div id="menu-jk" class="nav-part shadow-md bg-white navcol">
         <div class="container-lg">
             <div class="row  p-2">
-                <div class="col-lg-4 p-2">
-                    <img class="max-230" src="{% static 'images/logo-Honey_Pure-en.png' %}" alt="">
-                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="{% if LANGUAGE_CODE == 'fa' or LANGUAGE_CODE == 'ar' %}float-start{% else %}float-end{% endif %} d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
-                </div>
-                <div id="menu" class="col-lg-8 d-none d-lg-block">
+
+                <div id="menu" class="col-lg-10 d-none d-lg-block">
                     <div class="row float-end">
                       <ul>
                           <!-- Add Login and Register buttons -->
                           {% if user.is_authenticated %}
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <form action="{% url 'logout' %}" method="post" class="d-inline">
                                       {% csrf_token %}
                                       <button type="submit" class="btn btn-primary btn-custom">
@@ -24,26 +21,26 @@
                                       </button>
                                   </form>
                               </li>
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary btn-custom">
                                       <i class="bi bi-cart me-2"></i>{% trans "Cart" %} ({{ cart_total_items }})
                                   </a>
                               </li>
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <span class="btn btn-outline-secondary btn-custom">{% trans "Hello," %} {{ user.username }}</span>
                               </li>
                           {% else %}
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <a href="{% url 'register' %}" class="btn btn-primary btn-custom">
                                       <i class="bi bi-person-plus-fill me-2"></i>{% trans "Register" %}
                                   </a>
                               </li>
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <a href="{% url 'login' %}" class="btn btn-outline-primary btn-custom">
                                       <i class="bi bi-box-arrow-in-right me-2"></i>{% trans "Login" %}
                                   </a>
                               </li>
-                              <li class="float-end py-2 px-3">
+                              <li class="float-start py-2 px-3">
                                   <a href="{% url 'cart_detail' %}" class="btn btn-outline-primary btn-custom">
                                       <i class="bi bi-cart me-2"></i>{% trans "Cart" %} ({{ cart_total_items }})
                                   </a>
@@ -66,6 +63,10 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div class="col-lg-2 p-2">
+                    <img class="max-230" src="{% static 'images/logo-Honey_Pure-en.png' %}" alt="">
+                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="{% if LANGUAGE_CODE == 'fa' or LANGUAGE_CODE == 'ar' %}float-start{% else %}float-end{% endif %} d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
                 </div>
             </div>
         </div>
