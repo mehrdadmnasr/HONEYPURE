@@ -8,6 +8,11 @@
         <div class="container-lg">
             <div class="row  p-2">
 
+                <div class="col-lg-2 p-2">
+                    <img class="max-230" src="{% static 'images/logo-Honey_Pure-en.png' %}" alt="">
+                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="{% if LANGUAGE_CODE == 'fa' or LANGUAGE_CODE == 'ar' %}float-start{% else %}float-end{% endif %} d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+                </div>
+
                 <div id="menu" class="col-lg-10 d-none d-lg-block">
                     <div class="row float-end">
                       <ul>
@@ -63,10 +68,6 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-lg-2 p-2">
-                    <img class="max-230" src="{% static 'images/logo-Honey_Pure-en.png' %}" alt="">
-                     <a  data-bs-toggle="collapse" data-bs-target="#menu" class="{% if LANGUAGE_CODE == 'fa' or LANGUAGE_CODE == 'ar' %}float-start{% else %}float-end{% endif %} d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 /* rtl.css*/
 body {
-    direction: rtl;
-    text-align: right;
+    direction: ltr;
+    text-align: left;
 }
 
 #text_continue {
